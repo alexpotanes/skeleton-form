@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import themes from '@utils/themes';
 import LayoutField from '@components/layouts/layout-field';
 import Input from '@components/elements/input';
@@ -48,25 +47,38 @@ class FormLogin extends Component {
     return (
       <form className={themes('FormLogin', theme)} onSubmit={this.onSubmit}>
         <LayoutField
-          label={'Логин'}
-          input={<Input type="text" value={data.login} onChange={this.onChange('login')} />}
+          input={
+            <Input
+              type="text"
+              placeholder="Логин"
+              value={data.login}
+              onChange={this.onChange('login')}
+            />
+          }
           error={<Error errors={errors} path={'login'} />}
         />
         <LayoutField
-          label={'Пароль'}
           input={
-            <Input type="password" value={data.password} onChange={this.onChange('password')} />
+            <Input
+              type="password"
+              placeholder="Пароль"
+              value={data.password}
+              onChange={this.onChange('password')}
+            />
           }
           error={<Error errors={errors} path={'password'} />}
         />
         <LayoutField
           input={
-            <Button type="submit" disabled={wait}>
+            <Button theme="green" type="submit" disabled={wait}>
               Войти{wait && '...'}
             </Button>
           }
           error={<Error errors={errors} path={''} />}
         />
+        <p style={{ fontSize: 12, color: '#aaa' }}>
+          Это тестовая форма, для авторизации используйте: test@example.com / 123456
+        </p>
       </form>
     );
   }

@@ -13,6 +13,7 @@ import api, { ssr as ssrApi } from '@api';
 import navigation from '@app/navigation';
 import App from '@app';
 import config from 'config.js';
+import 'theme/style.less';
 
 window.SSR = {
   active: false,

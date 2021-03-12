@@ -152,6 +152,14 @@ class Navigation {
   goPrivate(push = true) {
     push ? this._history.push('/private') : this._history.replace('/private');
   }
+
+  /**
+   * Custom navigations
+   * @param push Способ обновления истории роутера. Если false, то используется history.replace()
+   */
+  goLogin(push = true) {
+    push ? this._history.push('/login') : this._history.replace('/login');
+  }
 }
 
 export default new Navigation();

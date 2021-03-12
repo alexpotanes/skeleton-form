@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import session from '@store/session/actions';
-import detectActive from '@utils/detect-active';
 import LayoutHeader from '@components/layouts/layout-header';
-import MenuTop from '@components/menus/menu-top';
 import Button from '@components/elements/button';
-import Logo from '@components/elements/logo';
+import modal from '@store/modal/actions';
 
 class HeaderContainer extends Component {
   static propTypes = {
@@ -18,40 +17,35 @@ class HeaderContainer extends Component {
     session: PropTypes.object.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      items: detectActive(
-        [
-          { title: 'Главная', to: '/', active: false },
-          { title: 'О нас', to: '/about', active: false },
-          { title: 'Каталог', to: '/catalog', active: false },
-          { title: 'Админка', to: '/private', active: false },
-        ],
-        props.location,
-      ),
-    };
-  }
-
-  componentDidUpdate(nextProps) {
-    const { items } = this.state;
-    const { location } = this.props;
-
-    if (location !== nextProps.location) {
-      this.setState({
-        items: detectActive(items, nextProps.location),
-      });
-    }
-  }
+  onClickHome = () => {
+    this.props.history.push('/');
+  };
 
   onClickLogin = () => {
     this.props.history.push('/login');
   };
 
+  onClickRegistration = async () => {
+    await modal.open('registration', {
+      overflowTransparent: false,
+      overflowClose: true,
+    });
+  };
+
   onClickLogout = () => {
     session.clear();
   };
+
+  renderLeft() {
+    const { location } = this.props;
+    if (location.pathname === '/login') {
+      return (
+        <Button key={1} theme={['gray-back', 'margins']} onClick={this.onClickHome}>
+          На главную
+        </Button>
+      );
+    }
+  }
 
   renderRight() {
     const { session } = this.props;
@@ -59,26 +53,33 @@ class HeaderContainer extends Component {
 
     if (session.exists) {
       items.push(
-        <Button key={1} theme={['clear-white', 'margins']} onClick={this.onClickLogout}>
+        <Button key={1} theme={['green', 'margins']} onClick={this.onClickLogout}>
           Выход
         </Button>,
       );
     } else {
-      items.push(
-        <Button key={1} theme={['clear-white', 'margins']} onClick={this.onClickLogin}>
-          Вход
-        </Button>,
-      );
+      if (location.pathname === '/login') {
+        items.push(
+          <Button key={1} theme={['green', 'margins']} onClick={this.onClickRegistration}>
+            Регистрация
+          </Button>,
+        );
+      } else {
+        items.push(
+          <Button key={1} theme={['green', 'margins']} onClick={this.onClickRegistration}>
+            Регистрация
+          </Button>,
+          <Button key={2} theme={['green', 'margins']} onClick={this.onClickLogin}>
+            Вход
+          </Button>,
+        );
+      }
     }
     return items;
   }
 
   render() {
-    const { items } = this.state;
-
-    return (
-      <LayoutHeader left={<Logo />} right={this.renderRight()} center={<MenuTop items={items} />} />
-    );
+    return <LayoutHeader left={this.renderLeft()} right={this.renderRight()} />;
   }
 }
 

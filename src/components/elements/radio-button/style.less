@@ -1,0 +1,36 @@
+@import '../../../theme/variables';
+
+.RadioButton {
+  display: inline-block;
+  position: relative;
+
+  &__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+
+    &:checked + .RadioButton__label {
+      background: @green;
+      color: @white;
+    }
+  }
+
+  &__label {
+    box-sizing: border-box;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding: 0 18px;
+    height: 34px;
+    background: transparent;
+    border: 1px solid @green;
+    border-radius: 4px;
+    font-size: 14px;
+    color: @black;
+    transition: all ease .25s;
+    cursor: pointer;
+  }
+}

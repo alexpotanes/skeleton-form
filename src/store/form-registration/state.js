@@ -4,8 +4,10 @@ export const types = {
 
 export default {
   data: {
+    name: '',
     login: '',
     password: '',
+    gender: 'male',
   },
   wait: false,
   errors: null,

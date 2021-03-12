@@ -30,11 +30,8 @@ export default http;
 /**
  * Reexport API modules
  */
-import Common from '@api/common';
 import Users from '@api/users';
 import Srr from '@api/ssr';
 
 export const ssr = new Srr(http);
 export const users = new Users(http);
-export const articles = new Common(http, 'articles');
-export const categories = new Common(http, 'categories');

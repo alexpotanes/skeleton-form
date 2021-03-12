@@ -1,3 +1,5 @@
+@import "../../../theme/variables.less";
+
 .Button {
   padding: 8px 10px;
   display: inline-block;
@@ -31,6 +33,50 @@
   }
 
   &_theme {
+
+    &_gray-back {
+      position: relative;
+      background-color: transparent;
+      border: none;
+      color: @black;
+      transition: background-color ease .25s;
+      padding-left: 25px;
+      &:before,
+      &:after {
+        display: block;
+        content: '';
+        width: 10px;
+        height: 1.5px;
+        background: @black;
+        position: absolute;
+        left: 8px;
+      }
+      &:before {
+        transform: rotate(-45deg);
+        top: 13px;
+      }
+      &:after {
+        transform: rotate(45deg);
+        bottom: 13px;
+      }
+      &:hover {
+        background-color: @graySameLight;
+      }
+    }
+
+    &_green {
+      background-color: @green;
+      border: none;
+      opacity: 1;
+      transition: opacity ease .25s;
+      &:hover {
+        opacity: .8;
+      }
+    }
+
+    &_margins {
+      margin: 5px 0 5px 15px;
+    }
 
     &_square {
       position: relative;

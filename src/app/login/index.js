@@ -27,7 +27,7 @@ function Login(props) {
     <LayoutPage header={<HeaderContainer />}>
       <LayoutContent>
         <Fragment>
-          <h1>Login page</h1>
+          <h1>Авторизация</h1>
           <FormLogin
             data={select.formLogin.data}
             errors={select.formLogin.errors}

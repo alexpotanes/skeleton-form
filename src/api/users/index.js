@@ -11,27 +11,6 @@ export default class Users extends Common {
   }
 
   /**
-   * Выбор списка
-   * @param search {Object} Параметры поиска
-   * @param fields {String} Какие поля выбирать
-   * @param limit {Number} Количество
-   * @param skip {Number} Сдвиг выборки от 0
-   * @param path {String} Путь в url
-   * @param other {Object} Другие параметры апи
-   * @returns {Promise}
-   */
-  getList({
-    search,
-    fields = 'items(*), count, allCount, newCount, confirmCount, rejectCount',
-    limit = 20,
-    skip = 0,
-    path,
-    ...other
-  }) {
-    return super.getList({ search, fields, limit, skip, path, ...other });
-  }
-
-  /**
    * Выбор одного юзера по токену (текущего авторизованного)
    * @return {Promise}
    */
@@ -64,13 +43,5 @@ export default class Users extends Common {
    */
   logout() {
     return this.http.delete(`/api/v1/users/sign`);
-  }
-
-  registration({ profile = {}, ...rest }) {
-    return this.http.post(`/api/v1/users`, { profile, ...rest });
-  }
-
-  resetPassword({ login }) {
-    return this.http.post(`/api/v1/users/password`, { login });
   }
 }
