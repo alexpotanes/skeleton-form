@@ -7,14 +7,21 @@
   padding: 5px 0;
 
   &__label{
-    text-align: left;
-    width: 200px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    width: 160px;
+    color: @gray;
   }
   &__input{
     text-align: left;
     flex-grow: 1;
     &-inner{
-      display: block;
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: space-between;
     }
   }
   &__error{

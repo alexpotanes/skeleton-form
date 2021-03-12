@@ -4,11 +4,13 @@ import themes from '@utils/themes';
 
 import './style.less';
 
-class Input extends Component {
+class RadioButton extends Component {
   static propTypes = {
     value: PropTypes.node.isRequired,
     type: PropTypes.string,
     placeholder: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string,
     required: PropTypes.bool,
     focused: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -18,6 +20,7 @@ class Input extends Component {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    checked: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -49,17 +52,22 @@ class Input extends Component {
       disabled,
       tabIndex,
       autocomplete,
+      name,
+      title,
+      checked,
     } = this.props;
 
     return (
-      <div className={themes('Input', this.props.theme)}>
+      <label className={themes('RadioButton', this.props.theme)}>
         <input
-          className="Input__input"
+          className="RadioButton__input"
           value={value}
           type={type}
+          name={name}
           placeholder={placeholder}
           tabIndex={tabIndex}
           disabled={disabled}
+          checked={checked}
           required={required}
           autoFocus={focused}
           autoComplete={autocomplete ? 'on' : 'off'}
@@ -67,9 +75,10 @@ class Input extends Component {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
-      </div>
+        <span className="RadioButton__label">{title}</span>
+      </label>
     );
   }
 }
 
-export default Input;
+export default RadioButton;

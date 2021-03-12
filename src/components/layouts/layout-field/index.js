@@ -22,7 +22,7 @@ class LayoutField extends Component {
 
     return (
       <div className={themes('LayoutField', theme)}>
-        <div className="LayoutField__label">{label}</div>
+        {label && <div className="LayoutField__label">{label}</div>}
         <div className="LayoutField__input">
           <div className="LayoutField__input-inner">{input}</div>
           <div className="LayoutField__error">{error}</div>
